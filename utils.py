@@ -152,4 +152,3 @@ def time_sleep(time_sec):
         time.sleep(1)
     return
 
-time_sleep(60)

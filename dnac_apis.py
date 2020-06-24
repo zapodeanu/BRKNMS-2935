@@ -855,24 +855,41 @@ def check_ipv4_network_interface(ip_address, dnac_jwt_token):
     """
     This function will check if the provided IPv4 address is configured on any network interfaces
     :param ip_address: IPv4 address
-    :param dnac_jwt_token: DNA C token
+    :param dnac_jwt_token: Cisco DNA Center token
     :return: None, or device_hostname and interface_name
     """
-    url = DNAC_URL + '/api/v1/interface/ip-address/' + ip_address
+    url = DNAC_URL + '/dna/intent/api/v1/interface/ip-address/' + ip_address
     header = {'content-type': 'application/json', 'x-auth-token': dnac_jwt_token}
     response = requests.get(url, headers=header, verify=False)
     response_json = response.json()
-    try:
-        response_info = response_json['response'][0]
-        interface_name = response_info['portName']
-        device_id = response_info['deviceId']
-        device_info = get_device_info(device_id, dnac_jwt_token)
-        device_hostname = device_info['hostname']
-        return device_hostname, interface_name
-    except:
-        device_info = get_device_info_ip(ip_address, dnac_jwt_token)  # required for AP's
-        device_hostname = device_info['hostname']
-        return device_hostname, ''
+    response_status = response_json['response']
+
+    # if response_status is a dict, it will include an error code. This means the IPv4 address is not assigned
+    # to any managed network devices. We will check the PnP inventory next.
+    # if the response_status is a list, it will include the info for the device with the interface
+    # configured with the specified IPv4 address
+
+    if type(response_status) is dict:
+        pnp_device_list = pnp_get_device_list(dnac_jwt_token)
+        for pnp_device in pnp_device_list:
+            if pnp_device['deviceInfo']['httpHeaders'][0]['value'] == ip_address:
+                device_hostname = pnp_device['deviceInfo']['hostname']
+                return 'Found', device_hostname, ''
+        return response_status['errorCode'], '', ''
+    else:
+        # noinspection PyBroadException
+        try:
+            response_info = response_json['response'][0]
+            interface_name = response_info['portName']
+            device_id = response_info['deviceId']
+            device_info = get_device_info(device_id, dnac_jwt_token)
+            device_hostname = device_info['hostname']
+            return 'Found', device_hostname, interface_name
+        except:
+            device_info = get_device_info_ip(ip_address, dnac_jwt_token)  # required for AP's
+            device_hostname = device_info['hostname']
+            return 'Found', device_hostname, ''
+
 
 
 def get_device_info_ip(ip_address, dnac_jwt_token):

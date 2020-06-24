@@ -1,4 +1,7 @@
 !
+interface Loopback 35
+ ip address 10.93.141.35 255.255.255.255
+!
 interface Tunnel201
  ip vrf forwarding REMOTE
  ip address 172.16.201.2 255.255.255.0
@@ -10,8 +13,8 @@ interface GigabitEthernet3
  ip vrf forwarding REMOTE
  ip address 172.16.299.5 255.255.255.0
 !
-interface Loopback100
- ip address 10.93.130.34 255.255.255.255
+interface Loopback1301
+ ip address 10.93.130.1 255.255.255.255
 !
 router eigrp 100
  network 10.100.1.1 0.0.0.0
