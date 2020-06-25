@@ -6,11 +6,12 @@ Software included:
 - ERNA.py - full lab/POC Python code.
 - config.py - init file for variables
 - dnac_apis.py - Python module with various Cisco DNA Center functions
-- webex_teams_apis.py - Python module with various Spark functions
+- webex_teams_apis.py - Python module with various Webex Teams functions
 - service_now_apis.py - Python module with various ServiceNow functions
 - utils.py - Python module with few handy functions
 - netconf_restconf.py - RESTCONF and NETCONF interface operational status
 - verify_ip_duplicate.py - verify CLI templates for duplicated IP addresses with in production IP addresses
+- path_trace.py - Cisco DNA Center Path Trace between two endpoints
 
 This session will showcase the use of the open REST API's available in:
 
