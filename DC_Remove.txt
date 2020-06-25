@@ -3,6 +3,7 @@ no ip vrf SECURE_REMOTE
 !
 no interface Loopback200
 !
+no interface Loopback201
 no interface Tunnel201
 !
 default interface GigabitEthernet3

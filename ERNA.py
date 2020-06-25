@@ -78,7 +78,7 @@ def main():
     # the user will be asked if interested to run in demo mode or in
     # production (logging to files - erna_log.log, erna_err.log))
 
-    user_input = utils.get_input_timeout('If running in Demo Mode please enter y ', 10)
+    # user_input = utils.get_input_timeout('If running in Demo Mode please enter y ', 10)
 
     user_input = 'y'  # remove this line if you want to run in production
     if user_input != 'y':
@@ -355,7 +355,7 @@ def main():
 
     # create and update ServiceNow incident
 
-    snow_user = 'ERNA'
+    snow_user = 'demotme'
     snow_description = 'ERNA Automation - Vendor Remote Access to IPD: ' + IPD_IP
 
     snow_incident = service_now_apis.create_incident(snow_description, log_ipd_info, snow_user, '2')

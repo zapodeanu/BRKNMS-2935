@@ -1,49 +1,6 @@
-#!/usr/bin/env python3
-
-
-# developed by Gabi Zapodeanu, TME, Enterprise Networking, Cisco Systems
-
-
-import urllib3
-from requests.auth import HTTPBasicAuth  # for Basic Auth
-from urllib3.exceptions import InsecureRequestWarning  # for insecure https warnings
-
-import dnac_apis
-import utils
-from config import DNAC_PASS, DNAC_USER
-
-urllib3.disable_warnings(InsecureRequestWarning)  # disable insecure https warnings
-
-DNAC_AUTH = HTTPBasicAuth(DNAC_USER, DNAC_PASS)
-
-
-def main():
-    """
-    - This script will:
-      - load a configuration file to be deployed to a network device
-      - identify the IPv4 addresses that will be configured on interfaces
-      - search using the Cisco DNA Center database if these IPV4 addresses are configured on any interfaces
-      - find if any clients are using the IPv4 addresses
-    - Determine if deploying the configuration file will create an IP duplicate
-    """
-
-    # configuration template file name
-    config_file = 'configuration_template.txt'
-
-    # open file with the template
-    cli_file = open(config_file, 'r')
-
-    # read the file
-    cli_config = cli_file.read()
-    print('\n The CLI template:\n')
-    print(cli_config)
-
-
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-
-
 
 Copyright (c) 2019 Cisco and/or its affiliates.
 
@@ -68,14 +25,15 @@ __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2019 Cisco and/or its affiliates."
 __license__ = "Cisco Sample Code License, Version 1.1"
 
+
 import os
 import urllib3
-from requests.auth import HTTPBasicAuth  # for Basic Auth
-from urllib3.exceptions import InsecureRequestWarning  # for insecure https warnings
-
 import dnac_apis
 import utils
+
 from config import DNAC_PASS, DNAC_USER
+from requests.auth import HTTPBasicAuth  # for Basic Auth
+from urllib3.exceptions import InsecureRequestWarning  # for insecure https warnings
 
 urllib3.disable_warnings(InsecureRequestWarning)  # disable insecure https warnings
 
@@ -85,8 +43,7 @@ DNAC_AUTH = HTTPBasicAuth(DNAC_USER, DNAC_PASS)
 def main():
     """
     This sample script will:
-     - ask user to input the file name with the CLI template to be configured
-     - validate the provided file name exists
+     - validate the CLI template file name exists
      - open the file
      - select the IPv4 addresses to be configured on interfaces
      - validate if the selected IPv4 addresses are valid IPv4 addresses

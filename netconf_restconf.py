@@ -18,11 +18,11 @@ from requests.auth import HTTPBasicAuth  # for Basic Auth
 
 urllib3.disable_warnings(InsecureRequestWarning)  # disable insecure https warnings
 
-SW_HOST = '10.93.130.21'
-RO_HOST = '10.93.130.41'
+SW_HOST = '10.93.141.23'
+RO_HOST = '10.93.141.26'
 PORT = 830
-USER ='cisco'
-PASS ='cisco'
+USER = 'cisco'
+PASS = 'cisco'
 ROUTER_AUTH = HTTPBasicAuth(USER, PASS)
 
 

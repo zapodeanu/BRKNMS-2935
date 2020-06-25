@@ -891,7 +891,6 @@ def check_ipv4_network_interface(ip_address, dnac_jwt_token):
             return 'Found', device_hostname, ''
 
 
-
 def get_device_info_ip(ip_address, dnac_jwt_token):
     """
     This function will retrieve the device information for the device with the management IPv4 address {ip_address}

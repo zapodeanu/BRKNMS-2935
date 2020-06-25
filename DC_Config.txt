@@ -7,6 +7,10 @@ ip vrf SECURE_REMOTE
 interface Loopback200
  ip address 10.93.140.48 255.255.255.255
 !
+interface Loopback201
+ ip vrf forwarding SECURE_REMOTE
+ ip address 172.16.201.1 255.255.255.255
+
 interface Tunnel201
  ip vrf forwarding SECURE_REMOTE
  ip address 10.93.140.45 255.255.255.252
@@ -30,6 +34,6 @@ router eigrp 201
  address-family ipv4 vrf SECURE_REMOTE
   network 10.93.140.45 0.0.0.0
   network 172.16.202.1 0.0.0.0
+  network 172.16.201.1 0.0.0.0
   autonomous-system 201
  exit-address-family
-

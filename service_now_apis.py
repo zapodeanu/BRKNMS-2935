@@ -108,7 +108,6 @@ def update_incident(incident, comment, username):
     response = requests.patch(url, auth=(username, SNOW_PASS), data=json.dumps(payload), headers=headers)
 
 
-
 def get_incident_sys_id(incident):
     """
     This function will find the incident sys_id for the incident with the number {incident}
@@ -192,5 +191,4 @@ def find_comment(incident, comment):
         if comment == comment_info['value']:
             return True
     return False
-
 
